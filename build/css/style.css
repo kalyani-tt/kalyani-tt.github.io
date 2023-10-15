@@ -1,0 +1,31 @@
+.transclude {
+  margin-left: 10px;
+  padding: 5px;
+  box-shadow: -1px 0px 0px 0px grey
+}
+
+pre code {
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}
+
+.heading {
+  font-size: 120%
+}
+
+a {
+  text-decoration-style: dotted;
+  color: black
+}
+
+p {
+  text-align: justify;
+  hyphens: auto;
+  margin-top: 1rem;
+}
+
+body {
+  margin-left: 35%;
+  margin-right: 35%
+}

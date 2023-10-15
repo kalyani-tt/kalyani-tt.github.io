@@ -1,0 +1,21 @@
+\import{base-macros}
+\metadata{
+    \title{Types as Predicates}
+    \date{10/15/2023}
+}
+
+\idea{Types as Predicates}{
+    \p{Instead of defining types as a built-in notion, limited to e.g \icode{struct}, \icode{enum}, \icode{int}, etc, types are predicates. So we can take any sort of property we want a value to have, and turn that into a type. We can then interpret the types as a logic programming language and \i{execute} the types in that way to get a typechecker.}
+
+    \p{Here's a sketch of what it could look like (where \icode{self} is the value being typechecked)}
+    \bcode{
+type positive :=
+    self = 0 #\/
+    exists n,
+        positive(n) /#\
+        self = 1 + n
+
+let n: positive = 1 + 1 + 1 + 0
+    }
+    \p{And then the compiler executes \icode{positive(1 + 1 + 1 + 0)} as a logic program to typecheck \icode{n}.}
+}

@@ -1,0 +1,87 @@
+\def{heading}{content}{
+    <strong class="heading">
+        \content
+    </strong>
+}
+
+\def{definition}{name content}{
+    \heading{Definition ✍️} \link{\name}{\cat{\filename}{.html}}
+    \p{\content}
+}
+
+\def{blogpost}{name content}{
+    \heading{Blogpost 💬} \link{\name}{\cat{\filename}{.html}}
+    \p{\content}
+}
+
+\def{remark}{name content}{
+    \heading{Remark 🗣️} \link{\name}{\cat{\filename}{.html}}
+    \p{\content}
+}
+
+\def{note}{name content}{
+    \heading{Note❗} \link{\name}{\cat{\filename}{.html}}
+    \p{\content}
+}
+
+\def{idea}{name content}{
+    \heading{Project Idea 💡 } \link{\name}{\cat{\filename}{.html}}
+    \p{\content}
+}
+
+\def{transclude}{name}{
+    <div class="transclude">
+        \include{\name}
+    </div>
+}
+
+\def{link}{content ref}{
+    <a href="\ref">\content</a>
+}
+
+\def{ref}{content ref}{
+    <a href="\cat{\ref}{.html}">\content</a>
+}
+
+\def{i}{content}{
+    <i>\content</i>
+}
+
+\def{p}{content}{
+    <p>
+        \content
+    </p>
+}
+
+\def{iter}{xs body}{
+    \if{\isnil{\xs}}{
+        \blank
+    }{
+        \body{\head{\xs}}
+        \iter{\tail{\xs}}{\body}
+    }
+}
+
+\def{bullets}{content}{
+    <ul>
+        \content
+    </ul>
+}
+
+\def{enumerate}{content}{
+    <ol>
+        \content
+    </ol>
+}
+
+\def{item}{content}{
+    <li>\content</li>
+}
+
+\def{bcode}{content}{
+    <pre><code>\content</code></pre>
+}
+
+\def{icode}{content}{
+    <code>\content</code>
+}

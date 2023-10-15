@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kali's Notes</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<h2><a href="this-site.html">Kali's Notes</a></h2>
+<strong class="heading">
+        Blogpost 💬
+    </strong> <a href="peridot-retrospective.html">Looking Back on Peridot</a>
+    <p>
+        <p>
+        In <a href="https://github.com/eashanhatti/peridot">Peridot</a> the idea was essentially to design two languages and stick them together - one for metaprogramming, and one for regular ("object") programming. The metaprogramming layer was a logic language, and the object layer was a functional language. The key idea was that the two layers wouldn't overlap in terms of functionality - logic programming would be better suited than FP for implementing optimizations/transformations on code, and it wouldn't be used to much of anything else. The object layer wasn't super important, I just picked functional programming because I was most comfortable with it.
+    </p>
+
+    <p>
+        The issue I ran into pretty much immediately is that when I would program in the metalanguage, I would find myself wishing I had features from the object language. I think the root of this was that my assumption was wrong - I thought that the layers wouldn't intersect too much in the kinds of problems they would be handling, but this is wrong! No matter what the language paradigm, we can and will have to handle general-purpose programming tasks when the problems become more complex. An small optimizer might fit neatly into a set of rewrite rules defined by an idiomatic logic program, but as the optimizer gets more complex it becomes much more than a neat set of rewrites. The small logic language "just for metaprogramming" I had originally turned into a much more complex and general-purpose language.
+    </p>
+
+    <p>
+        I started off thinking I'd only have to maintain a general-purpose object language and a small metalanguage. What the ended up turning into was maintaining two languages that overlapped in functionality, but not in features. Developing one language is tough, imagine developing two in one!
+    </p>
+
+    <p>
+        This is ironic since that sort of situation was exactly what I intended to avoid. In my head, the dual language situation of say, C++ (regular C++ plus the template language) was difficult because the template language hadn't been designed to be an actual language in the first place - it unintentionally evolved into a (pure functional!) language over time. Now I don't think that's the issue - I think the issue is just having two overlapping languages in the first place. Yes C++ programmers complain about the template language's dearth of debugging facilities and difficulty to read/write, but from what I've seen the main complaint is that templates are a separate language in the first place - advanced programming in C++ requires not learning one language, but two.
+    </p>
+
+    <p>
+        Learning two languages at the same time is hard, and second, the languages inevitably start to overlap in functionality over time. The compiler implementer asks themself why they are implementing two general-purpose languages at once, and the programmers asks why they can only use one set of features at compile time and a completely different set at runtime. 
+    </p>
+
+    <p>
+        Peridot's design didn't work out, but the design space is much larger than what I explored here! For instance one alternative idea I've seen floating around is to have one language be a <i>subset</i> (in terms of features) of the other. For instance, the metaprogramming layer may have more high-level features that are difficult to compile, and the object layer omits those features to allow compilation to efficient code.
+    </p>
+
+    <p>
+        Despite Peridot's design not working out, I still learned a lot! Negative information is just as valuable as positive information, and I hope it informs others' future exploration into the design space.
+    </p>
+    </p>
+</body>

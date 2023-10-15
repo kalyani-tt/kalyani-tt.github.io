@@ -1,0 +1,15 @@
+\import{base-macros}
+\metadata{
+    \title{This Site}
+    \date{10/13/2023}
+}
+
+\definition{This Site}{
+    \p{This site contains my notes!}
+
+    \bullets{
+        \iter{\allfiles}{
+            [file => \item{\ref{\metadata{\file}{title}}{\file}}]
+        }
+    }
+}
