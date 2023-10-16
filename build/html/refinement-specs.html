@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kali's Notes</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<h2><a href="this-site.html">Kali's Notes</a></h2>
+<strong class="heading">
+        Remark 🗣️
+    </strong> <a href="refinement-specs.html">Refinement and Program Specifications</a>
+    <p>
+        <div class="transclude">
+        <strong class="heading">
+        Definition ✍️
+    </strong> <a href="refinement.html">Refinement</a>
+    <p>
+        We say that something refines something else if it is "more specific" is some sense, e.g:
+    <ol>
+        <li>In a state transition system, one transition relation <code>T</code> refines another <code>T'</code> if <code>∀s t, T s t → T' s t</code></li>
+        <li>A strategy <code>V</code> refines another <code>V'</code> if <code>∀s, s ∈ V → s ∈ V'</code></li>
+    </ol>
+    </p>
+    </div>
+
+    <p>
+        We can state that a program meets a specification using <i>refinement</i>. All we need is a specification and a way of interpreting <i>programs</i> as specifications. For instance a specification might be a state transition system describing that valid transitions the program can make, and the interpretation of the program is the transition system describing how the program actually executes. We then prove that the program refines the spec.
+    </p>
+
+    <p>
+        Relevant:
+        <ol>
+        <li><a href="https://6826.csail.mit.edu/2020/papers/armada.pdf">Armada</a></li>
+            <li><a href="https://flint.cs.yale.edu/flint/publications/ctlinear.pdf">A Compositional Theory of Linearizability</a> (They use linearizability as their notion of refinement)</li>
+    </ol>
+    </p>
+    </p>
+</body>

@@ -1,0 +1,18 @@
+\import{base-macros}
+\metadata{
+    \title{Refinement and Program Specifications}
+}
+
+\remark{Refinement and Program Specifications}{
+    \transclude{refinement}
+
+    \p{We can state that a program meets a specification using \i{refinement}. All we need is a specification and a way of interpreting \i{programs} as specifications. For instance a specification might be a state transition system describing that valid transitions the program can make, and the interpretation of the program is the transition system describing how the program actually executes. We then prove that the program refines the spec.}
+
+    \p{
+        Relevant:
+        \enumerate{
+            \item{\link{Armada}{https://6826.csail.mit.edu/2020/papers/armada.pdf}}
+            \item{\link{A Compositional Theory of Linearizability}{https://flint.cs.yale.edu/flint/publications/ctlinear.pdf} (They use linearizability as their notion of refinement)}
+        }
+    }
+}

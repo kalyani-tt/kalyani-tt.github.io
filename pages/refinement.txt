@@ -1,0 +1,12 @@
+\import{base-macros}
+\metadata{
+    \title{Refinement}
+}
+
+\definition{Refinement}{
+    We say that something refines something else if it is "more specific" is some sense, e.g:
+    \enumerate{
+        \item{In a state transition system, one transition relation \icode{T} refines another \icode{T'} if \icode{∀s t, T s t → T' s t}}
+        \item{A strategy \icode{V} refines another \icode{V'} if \icode{∀s, s ∈ V → s ∈ V'}}
+    }
+}
