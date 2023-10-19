@@ -1,0 +1,12 @@
+\import{base-macros}
+\metadata{
+    \title{Verification of Heterogeneous Systems}
+}
+
+\remark{Verification of Heterogeneous Systems}{
+    \p{A \i{heterogeneous system} is a system comprised of components that use multiple different computational models - e.g systems written in different programming languages. Verification of these systems using a \i{syntactic} approach is difficult because a different verification framework needs to be developed for each computational model, and then one needs to define what it means for the proofs of verification to be linked together as the components themselves are linked.}
+
+    \p{In the better case, we have a \i{compiler} that we can use to translate all the components to one model, verify the compiled components, and then link the components and proofs together to get a full program and full proof of verification.}
+
+    \p{In the best case, we have a shared, compositional denotational semantics for all the components, and a verification framework for that model. This is a generalization of the previous case.}
+}

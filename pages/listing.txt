@@ -1,11 +1,11 @@
 \import{base-macros}
 \metadata{
-    \title{This Site}
+    \title{All Notes}
     \date{10/13/2023}
 }
 
-\definition{This Site}{
-    \p{This site contains my notes!}
+\section{All Notes}{
+    \p{This lists all of the notes on this site.}
 
     \bullets{
         \iter{\allfiles}{

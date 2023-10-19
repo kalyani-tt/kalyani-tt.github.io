@@ -1,33 +1,25 @@
-.transclude {
-  margin-left: 10px;
-  padding: 5px;
-  box-shadow: -1px 0px 0px 0px grey
-}
-
-pre code {
-  border: 1px solid #999;
-  display: block;
-  padding: 20px;
+@media (min-width: 500px) {
+  body {
+    margin: 25px 25px 25px 25px;
+    padding-right: calc(100vw - 500px)
+  }
 }
 
 .heading {
   font-size: 120%
 }
 
-a {
-  text-decoration-style: dotted;
+.transclude {
+  padding-left: 2%;
+  padding-bottom: 1px;
+  box-shadow: -1px 0px 0px 0px black
+}
+
+a.heading-link {
   color: black
 }
 
-p {
-  text-align: justify;
-  hyphens: auto;
-  margin-top: 1rem;
-}
-
-@media (min-width:600px) {
-  body {
-    margin-left: 35%;
-    margin-right: 35%
-  }
+a.inline-link {
+  color: blue;
+  text-decoration: none
 }

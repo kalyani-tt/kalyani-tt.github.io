@@ -4,28 +4,42 @@
     </strong>
 }
 
+\def{bold}{content}{
+    <strong>\content</strong>
+}
+
+\def{hlink}{content ref}{
+    <a class="heading-link" href="\ref">\content</a>
+}
+
 \def{definition}{name content}{
-    \heading{Definition ✍️} \link{\name}{\cat{\filename}{.html}}
+    \p{\heading{Definition ✍️} \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\content}
+}
+
+\def{section}{name content}{
+    \p{\heading{Section 🗄️} \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
 \def{blogpost}{name content}{
-    \heading{Blogpost 💬} \link{\name}{\cat{\filename}{.html}}
+    \p{\heading{Blogpost 💬} \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\metadata{\filename}{date}}
     \p{\content}
 }
 
 \def{remark}{name content}{
-    \heading{Remark 🗣️} \link{\name}{\cat{\filename}{.html}}
+    \p{\heading{Remark 🗣️} \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
 \def{note}{name content}{
-    \heading{Note❗} \link{\name}{\cat{\filename}{.html}}
+    \p{\heading{Note❗} \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
 \def{idea}{name content}{
-    \heading{Project Idea 💡 } \link{\name}{\cat{\filename}{.html}}
+    \p{\heading{Project Idea 💡 } \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
@@ -36,11 +50,11 @@
 }
 
 \def{link}{content ref}{
-    <a href="\ref">\content</a>
+    <a class="inline-link" href="\ref">\content</a>
 }
 
 \def{ref}{content ref}{
-    <a href="\cat{\ref}{.html}">\content</a>
+    <a class="inline-link" href="\cat{\ref}{.html}">\content</a>
 }
 
 \def{i}{content}{
