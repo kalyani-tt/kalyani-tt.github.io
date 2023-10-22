@@ -6,4 +6,10 @@
 \p{\heading{\hlink{Me}{me.html} 👋}}
 \p{Hello! I'm <strong>Kalyani</strong>.}
 
-\p{I'm a student primarily interested in formal verification, particularly verification of heterogeneous systems and making verification accessible for non-mathematicians. I use this site to put my notes out in public. You can find a list of all my notes \ref{here}{listing}.}
+\p{I'm a student primarily interested in formal verification, particularly verification of heterogeneous systems and making verification accessible for non-mathematicians. I use this site to put my notes out in public. Here are all of them:
+
+\bullets{
+    \iter{\allfiles}{
+        [file => \item{\ref{\metadata{\file}{title}}{\file}}]
+    }
+}}

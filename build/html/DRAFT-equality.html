@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kali's Notes</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<h2><a class="heading-link" href="me.html">Kali's Notes</a></h2>
+<p>
+        <strong class="heading">
+        Blogpost 💬
+    </strong> <a class="heading-link" href="DRAFT-equality.html">DRAFT: "Obvious" Equalities with Dependent Types</a> (10/19/2023)
+    </p>
+    <p>
+        <p class="frontmatter">
+        <i>This post assumes some experience with dependent types. Also, I'll be using <a class="inline-link" href="https://github.com/idris-lang/Idris-dev">Idris</a> syntax in this post.</i>
+    </p>
+
+    <p>
+        <strong class="heading">
+        Introduction
+    </strong>
+    </p>
+
+    <p>
+        At some point when programming with dependent types, a beginner might have some code very much like the following
+    </p>
+    <pre><code><code><span style="color: blue">someVec</span></code> : Vec <code><span style="color: blue">n</span></code> String
+<code><span style="color: blue">someVec</span></code> = <span style="color: green">-- Some code here to generate a vector</span></code></pre>
+
+    <p>
+        We have a vector of an unknown length <code><span style="color: blue">n</span></code>. Out of curiosity, they might try something else:
+    </p>
+
+    <pre><code><code><span style="color: blue">sameVecDifferentType</span></code> : Vec (0 + <code><span style="color: blue">n</span></code>) String
+<code><span style="color: blue">sameVecDifferentType</span></code> = someVec</code></pre>
+    <pre><code><span style="color: green">Program typechecked successfully</span>.</code></pre>
+
+    <p>
+        The beginner then thinks:
+    </p>
+
+    <blockquote>Cool! The typechecker knows that <code>0 + <code><span style="color: blue">n</span></code> = <code><span style="color: blue">n</span></code></code>, and so it allows me to assign use a vector of length <code><span style="color: blue">n</span></code> wherever a vector of length <code>0 + <code><span style="color: blue">n</span></code></code> is expected!</blockquote>
+
+    <p>
+        Excited by this observation, they might then try something a little different:
+    </p>
+
+    <pre><code><code><span style="color: blue">nextThing</span></code> : Vec <span style="background-color: yellow">(<code><span style="color: blue">n</span></code> + 0)</span> String
+<code><span style="color: blue">nextThing</span></code> = someVec</code></pre>
+    <pre><code><span style="color: red">Type Error</span>:
+    Expected vector of length `<code><span style="color: blue">n</span></code> + 0`, got vector of length `<code><span style="color: blue">n</span></code>`
+    (Cannot prove `<code><span style="color: blue">n</span></code> = <code><span style="color: blue">n</span></code> + 0`)</code></pre>
+
+    <p>
+        Well that's odd. Why doesn't this work?
+    </p>
+
+    <p>
+        <strong class="heading">
+        The Problem
+    </strong>
+    </p>
+    <p>
+        What this beginner has run up against is one of the main design problems in dependently typed programming languages: <i>Equality</i>. More specifically the difference between what equalities the typechecker can solve on its own, and which it requires user assistance to figure out.
+    </p>
+
+    <p>
+        The first thing anybody asks is <i>why</i>:
+    </p>
+    <blockquote>Why does the typechecker need my assistance with figuring out that <code><code><span style="color: blue">n</span></code> + 0 = <code><span style="color: blue">n</span></code></code> is true, but can figure out <code>0 + <code><span style="color: blue">n</span></code> = <code><span style="color: blue">n</span></code></code> on its own?</blockquote>
+
+    <p>
+        Good question! Let's ask ourselves another question to get us to the answer: Why can't the typechecker just figure out <i>all</i> equalities?
+    </p>
+    
+    <p>
+        Unfortunately it's been mathematically proven that the problem is <strong>undecidable</strong> - in other words, the problem of solving all equalities in general is equivalent to the <strong>Halting problem</strong>, meaning it's impossible to solve. The best we can do is create many algorithms that each handle a portion of the problem domain. There's algorithms for handling equations of linear arithmetic, boolean equations, etc, but we can't ever invent an algorithm that gives a correct yes/no question to any equation that comes up in a typical dependently typed language.
+    </p>
+
+    <p>
+        One might think that one could simply compute the terms as far as possible and then check to see if they have exactly the same syntax tree. For instance, we could have the problem <code>reallyBigAndComplicatedTerm = anotherComplicatedTerm</code>, but the problem eventually reduces to <code>0 = 1</code> after computing the terms as far as possible, and this equality is then an obvious one that can be solved automatically.
+    </p>
+
+    <p>
+        A problem with this approach is that the terms might contain <strong>infinite loops</strong>. If we have <code>loopingTerm = 1</code>, we would evaluate <code>loopingTerm</code> forever, never getting to the point where we could compare <code>1</code> to anything. We could add <i>resource limits</i> - e.g limiting a computation to compute for a certain max amount of time. This is a valid design decision, but it doesn't provide a <strong>universal equality checking algorithm</strong>. A term might eventually compute to a concrete value, but what if it took 1000 years to do so? Even though this equality is solvable, this "universal" algorithm isn't usable in this case.
+    </p>
+
+    <p>
+        <strong class="heading">
+        Designing Equality
+    </strong>
+    </p>
+
+    <p>
+        We can't create an algorithm that can handle all possible equations. This also answers our original question: The typechecker can't handle certain equations because at some point the <strong>language designer made the choice not to allow it to</strong>. This happens all the time when implementing dependently typed languages, with reasons including:
+    </p>
+    <ul>
+        <li>The algorithm for that kind of equations was too difficult to implement correctly</li>
+        <li>The language has features that make it very hard to effectively check this kind of equations</li>
+        <li>No algorithm had been invented yet for that kind of equations</li>
+        <li>That kind of equations emerged very rarely, and thus didn't justify the implementation effort</li>
+        <li>The algorithm for that kind of equations was very unpredictable, leading to a bad user experience</li>
+        <li><strong>Etc etc</strong></li>
+    </ul>
+
+    <p>
+        Let's see how addition is defined:
+    </p>
+    <pre><code><code><span style="color: blue">add</span></code> : Int -> Int -> Int
+<code><span style="color: blue">add</span></code> x y = case <code><span style="color: blue">x</span></code> of
+    0 => <code><span style="color: blue">y</span></code>
+    S z => <code><span style="color: blue">S</span></code> (<code><span style="color: blue">add</span></code> <code><span style="color: blue">z</span></code> <code><span style="color: blue">y</span></code>)</code></pre>
+
+    <p>
+        Addition pattern matches on the first argument, and based only on that decides how to continue computing. If the first argument is something like a variable, the function gets "<strong>stuck</strong>" and doesn't know how to proceed. So <code>0 + <code><span style="color: blue">n</span></code></code> directly computes to <code><code><span style="color: blue">n</span></code></code> because the first argument is a concrete value, but <code><code><span style="color: blue">n</span></code> + 0</code> doesn't compute because pattern match gets "stuck" on <code><code><span style="color: blue">n</span></code></code>
+    </p>
+
+    <p>
+        In this hypothetical language we're using that can't automatically figure out <code><code><span style="color: blue">n</span></code> + 0 = <code><span style="color: blue">n</span></code></code>, the designer made the choice not to implement anything fancier than "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.
+    </p>
+
+    <p>
+        The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, make equality a part of your design rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem.
+    </p>
+    </p>
+</body>

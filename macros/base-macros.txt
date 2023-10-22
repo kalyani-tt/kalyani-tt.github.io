@@ -1,45 +1,74 @@
-\def{heading}{content}{
+\def{stronghead}{content}{
     <strong class="heading">
         \content
     </strong>
 }
 
-\def{bold}{content}{
+\def{comment}{content}{
+    \blank
+}
+
+\def{heading}{content}{
+    \p{\stronghead{\content}}
+}
+
+\def{b}{content}{
     <strong>\content</strong>
+}
+
+\def{todo}{msg}{
+    <p><b style="color: red">TODO: \msg</b></p>
+}
+
+\def{yellow}{content}{
+    <span style="background-color: yellow">\content</span>
+}
+
+\def{color}{c t}{
+    <span style="color: \c">\t</span>
+}
+
+\def{frontmatter}{content}{
+    <p class="frontmatter">
+        \content
+    </p>
 }
 
 \def{hlink}{content ref}{
     <a class="heading-link" href="\ref">\content</a>
 }
 
+\def{bquote}{content}{
+    <blockquote>\content</blockquote>
+}
+
 \def{definition}{name content}{
-    \p{\heading{Definition ✍️} \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\stronghead{Definition ✍️} \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
 \def{section}{name content}{
-    \p{\heading{Section 🗄️} \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\stronghead{Section 🗄️} \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
 \def{blogpost}{name content}{
-    \p{\heading{Blogpost 💬} \hlink{\name}{\cat{\filename}{.html}}}
-    \p{\metadata{\filename}{date}}
+    \p{\stronghead{Blogpost 💬} \hlink{\name}{\cat{\filename}{.html}} (\metadata{\filename}{date})}
     \p{\content}
 }
 
 \def{remark}{name content}{
-    \p{\heading{Remark 🗣️} \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\stronghead{Remark 🗣️} \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
 \def{note}{name content}{
-    \p{\heading{Note❗} \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\stronghead{Note❗} \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
 \def{idea}{name content}{
-    \p{\heading{Project Idea 💡 } \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\stronghead{Project Idea 💡 } \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
@@ -98,4 +127,13 @@
 
 \def{icode}{content}{
     <code>\content</code>
+}
+
+\def{aside}{content}{
+<sup class="sidenote-inline-number"></sup>
+<span class="sidenote-number">
+    <small class="sidenote">
+        \content
+    </small>
+</span>
 }

@@ -1,0 +1,10 @@
+\import{base-macros}
+
+\def{var}{name}{
+    \icode{\color{blue}{\name}}
+}
+
+\def{defn}{name type val}{
+\var{\name} : \type
+\var{\name} = \val
+}

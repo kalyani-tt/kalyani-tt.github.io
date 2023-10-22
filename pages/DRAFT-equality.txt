@@ -1,0 +1,85 @@
+\import{base-macros}
+\import{idris-syntax}
+\metadata{
+    \title{DRAFT: "Obvious" Equalities with Dependent Types}
+    \date{10/19/2023}
+}
+
+\blogpost{DRAFT: "Obvious" Equalities with Dependent Types}{
+    \frontmatter{
+        \i{This post assumes some experience with dependent types. Also, I'll be using \link{Idris}{https://github.com/idris-lang/Idris-dev} syntax in this post.}
+    }
+
+    \heading{Introduction}
+
+    \p{At some point when programming with dependent types, a beginner might have some code very much like the following}
+    \bcode{
+\defn{someVec}{Vec \var{n} String}{\color{green}{-- Some code here to generate a vector}}
+    }
+
+    \p{We have a vector of an unknown length \var{n}. Out of curiosity, they might try something else:}
+
+    \bcode{
+\defn{sameVecDifferentType}{Vec (0 + \var{n}) String}{someVec}
+    }
+    \bcode{
+\color{green}{Program typechecked successfully}.
+    }
+
+    \p{The beginner then thinks:}
+
+    \bquote{Cool! The typechecker knows that \icode{0 + \var{n} = \var{n}}, and so it allows me to assign use a vector of length \var{n} wherever a vector of length \icode{0 + \var{n}} is expected!}
+
+    \p{Excited by this observation, they might then try something a little different:}
+
+    \bcode{
+\defn{nextThing}{Vec \yellow{(\var{n} + 0)} String}{someVec}
+    }
+    \bcode{
+\color{red}{Type Error}:
+    Expected vector of length `\var{n} + 0`, got vector of length `\var{n}`
+    (Cannot prove `\var{n} = \var{n} + 0`)
+    }
+
+    \p{Well that's odd. Why doesn't this work?}
+
+    \heading{The Problem}
+    \p{What this beginner has run up against is one of the main design problems in dependently typed programming languages: \i{Equality}. More specifically the difference between what equalities the typechecker can solve on its own, and which it requires user assistance to figure out.}
+
+    \p{The first thing anybody asks is \i{why}:}
+    \bquote{Why does the typechecker need my assistance with figuring out that \icode{\var{n} + 0 = \var{n}} is true, but can figure out \icode{0 + \var{n} = \var{n}} on its own?}
+
+    \p{Good question! Let's ask ourselves another question to get us to the answer: Why can't the typechecker just figure out \i{all} equalities?}
+    
+    \p{Unfortunately it's been mathematically proven that the problem is \b{undecidable} - in other words, the problem of solving all equalities in general is equivalent to the \b{Halting problem}, meaning it's impossible to solve. The best we can do is create many algorithms that each handle a portion of the problem domain. There's algorithms for handling equations of linear arithmetic, boolean equations, etc, but we can't ever invent an algorithm that gives a correct yes/no question to any equation that comes up in a typical dependently typed language.}
+
+    \p{One might think that one could simply compute the terms as far as possible and then check to see if they have exactly the same syntax tree. For instance, we could have the problem \icode{reallyBigAndComplicatedTerm = anotherComplicatedTerm}, but the problem eventually reduces to \icode{0 = 1} after computing the terms as far as possible, and this equality is then an obvious one that can be solved automatically.}
+
+    \p{A problem with this approach is that the terms might contain \b{infinite loops}. If we have \icode{loopingTerm = 1}, we would evaluate \icode{loopingTerm} forever, never getting to the point where we could compare \icode{1} to anything. We could add \i{resource limits} - e.g limiting a computation to compute for a certain max amount of time. This is a valid design decision, but it doesn't provide a \b{universal equality checking algorithm}. A term might eventually compute to a concrete value, but what if it took 1000 years to do so? Even though this equality is solvable, this "universal" algorithm isn't usable in this case.}
+
+    \heading{Designing Equality}
+
+    \p{We can't create an algorithm that can handle all possible equations. This also answers our original question: The typechecker can't handle certain equations because at some point the \b{language designer made the choice not to allow it to}. This happens all the time when implementing dependently typed languages, with reasons including:}
+    \bullets{
+        \item{The algorithm for that kind of equations was too difficult to implement correctly}
+        \item{The language has features that make it very hard to effectively check this kind of equations}
+        \item{No algorithm had been invented yet for that kind of equations}
+        \item{That kind of equations emerged very rarely, and thus didn't justify the implementation effort}
+        \item{The algorithm for that kind of equations was very unpredictable, leading to a bad user experience}
+        \item{\b{Etc etc}}
+    }
+
+    \p{Let's see how addition is defined:}
+    \bcode{
+\var{add} : Int -> Int -> Int
+\var{add} x y = case \var{x} of
+    0 => \var{y}
+    S z => \var{S} (\var{add} \var{z} \var{y})
+    }
+
+    \p{Addition pattern matches on the first argument, and based only on that decides how to continue computing. If the first argument is something like a variable, the function gets "\b{stuck}" and doesn't know how to proceed. So \icode{0 + \var{n}} directly computes to \icode{\var{n}} because the first argument is a concrete value, but \icode{\var{n} + 0} doesn't compute because pattern match gets "stuck" on \icode{\var{n}}}
+
+    \p{In this hypothetical language we're using that can't automatically figure out \icode{\var{n} + 0 = \var{n}}, the designer made the choice not to implement anything fancier than "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.}
+
+    \p{The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, make equality a part of your design rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem.}
+}

@@ -1,8 +1,13 @@
-@media (min-width: 500px) {
+@media (min-width: 600px) {
   body {
     margin: 25px 25px 25px 25px;
-    padding-right: calc(100vw - 500px)
+    padding-right: calc(50vw - 300px);
+    padding-left: calc(50vw - 300px)
   }
+}
+
+p {
+  hyphens: auto
 }
 
 .heading {
@@ -15,6 +20,14 @@
   box-shadow: -1px 0px 0px 0px black
 }
 
+blockquote:before {
+  content: "“";
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
 a.heading-link {
   color: black
 }
@@ -22,4 +35,53 @@ a.heading-link {
 a.inline-link {
   color: blue;
   text-decoration: none
+}
+
+.frontmatter {
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+  box-shadow: 0px 1px 0px 0px black
+}
+
+.sidenote {
+  hyphens: auto;
+  font-size: 80%;
+  position: relative;
+  float: left;
+  clear: left;
+  margin-left: -17vw;
+  text-align: right;
+  top: -3rem;
+  width: 15vw;
+  margin-top: 1rem;
+}
+
+body {
+  counter-reset: sidenote-counter;
+}
+.sidenote-inline-number {
+  counter-increment: sidenote-counter;
+}
+
+.sidenote-inline-number::before {
+  content: counter(sidenote-counter);
+}
+
+.sidenote::before {
+  content: counter(sidenote-counter)".";
+  position: relative;
+  vertical-align: baseline;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+code {
+  font-style: normal
+}
+
+pre {
+  padding: 15px;
+  display: block;
+  outline-color: black;
+  outline-style: dotted
 }
