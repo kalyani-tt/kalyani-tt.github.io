@@ -69,7 +69,7 @@
         \item{\b{Etc etc}}
     }
 
-    \p{Let's see how addition is defined\aside{Note: I'm assuming familiar with Peano numbers}:}
+    \p{Let's see how addition is defined\aside{Note: I'm assuming familiarity with Peano numbers}:}
     \bcode{
 \var{add} : Int -> Int -> Int
 \var{add} x y = case \var{x} of
