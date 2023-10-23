@@ -51,7 +51,7 @@
 
     \p{Good question! Let's ask ourselves another question to get us to the answer: Why can't the typechecker just figure out \i{all} equalities?}
     
-    \p{Unfortunately it's been mathematically proven that the problem is \b{undecidable} - in other words, the problem of solving all equalities in general is equivalent to the \b{Halting problem}, meaning it's impossible to solve. The best we can do is create many algorithms that each handle a portion of the problem domain. There's algorithms for handling equations of linear arithmetic, boolean equations, etc, but we can't ever invent an algorithm that gives a correct yes/no question to any equation that comes up in a typical dependently typed language.}
+    \p{Unfortunately it's been mathematically proven that the problem is \b{undecidable} - in other words, the problem of solving all equalities in general is equivalent to the \b{Halting problem}, meaning it's impossible to solve. The best we can do is create many algorithms that each handle a portion of the problem domain. There's algorithms for handling equations of linear arithmetic, boolean equations, etc, but we can't ever invent an algorithm that gives a correct yes/no answer to any equation that comes up in a typical dependently typed language.}
 
     \p{One might think that one could simply compute the terms as far as possible and then check to see if they have exactly the same syntax tree. For instance, we could have the problem \icode{reallyBigAndComplicatedTerm = anotherComplicatedTerm}, but the problem eventually reduces to \icode{0 = 1} after computing the terms as far as possible, and this equality is then an obvious one that can be solved automatically.}
 
