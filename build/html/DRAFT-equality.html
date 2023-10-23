@@ -14,7 +14,7 @@
     </p>
     <p>
         <p class="frontmatter">
-        <i>This post assumes some experience with dependent types. Also, I'll be using <a class="inline-link" href="https://github.com/idris-lang/Idris-dev">Idris</a> syntax in this post.</i>
+        <i>This post assumes some experience with programming in dependently typed languages. Also, I'll be using <a class="inline-link" href="https://github.com/idris-lang/Idris-dev">Idris</a> syntax in this post.</i>
     </p>
 
     <p>
@@ -30,7 +30,7 @@
 <code><span style="color: blue">someVec</span></code> = <span style="color: green">-- Some code here to generate a vector</span></code></pre>
 
     <p>
-        We have a vector of an unknown length <code><span style="color: blue">n</span></code>. Out of curiosity, they might try something else:
+        We have a vector of a fixed but unknown length <code><span style="color: blue">n</span></code>. Out of curiosity, they might try something else:
     </p>
 
     <pre><code><code><span style="color: blue">sameVecDifferentType</span></code> : Vec (0 + <code><span style="color: blue">n</span></code>) String
@@ -106,7 +106,12 @@
     </ul>
 
     <p>
-        Let's see how addition is defined:
+        Let's see how addition is defined<sup class="sidenote-inline-number"></sup>
+<span class="sidenote-number">
+    <small class="sidenote">
+        Note: I'm assuming familiar with Peano numbers
+    </small>
+</span>:
     </p>
     <pre><code><code><span style="color: blue">add</span></code> : Int -> Int -> Int
 <code><span style="color: blue">add</span></code> x y = case <code><span style="color: blue">x</span></code> of
@@ -121,6 +126,11 @@
         In this hypothetical language we're using that can't automatically figure out <code><code><span style="color: blue">n</span></code> + 0 = <code><span style="color: blue">n</span></code></code>, the designer made the choice not to implement anything fancier than "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.
     </p>
 
+    <p>
+        <strong class="heading">
+        Conclusion
+    </strong>
+    </p>
     <p>
         The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, make equality a part of your design rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem.
     </p>

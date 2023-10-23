@@ -7,7 +7,7 @@
 
 \blogpost{DRAFT: "Obvious" Equalities with Dependent Types}{
     \frontmatter{
-        \i{This post assumes some experience with dependent types. Also, I'll be using \link{Idris}{https://github.com/idris-lang/Idris-dev} syntax in this post.}
+        \i{This post assumes some experience with programming in dependently typed languages. Also, I'll be using \link{Idris}{https://github.com/idris-lang/Idris-dev} syntax in this post.}
     }
 
     \heading{Introduction}
@@ -17,7 +17,7 @@
 \defn{someVec}{Vec \var{n} String}{\color{green}{-- Some code here to generate a vector}}
     }
 
-    \p{We have a vector of an unknown length \var{n}. Out of curiosity, they might try something else:}
+    \p{We have a vector of a fixed but unknown length \var{n}. Out of curiosity, they might try something else:}
 
     \bcode{
 \defn{sameVecDifferentType}{Vec (0 + \var{n}) String}{someVec}
@@ -69,7 +69,7 @@
         \item{\b{Etc etc}}
     }
 
-    \p{Let's see how addition is defined:}
+    \p{Let's see how addition is defined\aside{Note: I'm assuming familiar with Peano numbers}:}
     \bcode{
 \var{add} : Int -> Int -> Int
 \var{add} x y = case \var{x} of
@@ -81,5 +81,6 @@
 
     \p{In this hypothetical language we're using that can't automatically figure out \icode{\var{n} + 0 = \var{n}}, the designer made the choice not to implement anything fancier than "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.}
 
+    \heading{Conclusion}
     \p{The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, make equality a part of your design rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem.}
 }
