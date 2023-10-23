@@ -1,11 +1,11 @@
 \import{base-macros}
 \import{idris-syntax}
 \metadata{
-    \title{DRAFT: "Obvious" Equalities with Dependent Types}
-    \date{10/19/2023}
+    \title{Equality, Dependent Types, and Typechecking}
+    \date{10/23/2023}
 }
 
-\blogpost{DRAFT: "Obvious" Equalities with Dependent Types}{
+\blogpost{Equality, Dependent Types, and Typechecking}{
     \frontmatter{
         \i{This post assumes some experience with programming in dependently typed languages. Also, I'll be using \link{Idris}{https://github.com/idris-lang/Idris-dev} syntax in this post.}
     }
@@ -77,10 +77,10 @@
     S z => \var{S} (\var{add} \var{z} \var{y})
     }
 
-    \p{Addition pattern matches on the first argument, and based only on that decides how to continue computing. If the first argument is something like a variable, the function gets "\b{stuck}" and doesn't know how to proceed. So \icode{0 + \var{n}} directly computes to \icode{\var{n}} because the first argument is a concrete value, but \icode{\var{n} + 0} doesn't compute because pattern match gets "stuck" on \icode{\var{n}}}
+    \p{Addition pattern matches on the first argument, and based only on that decides how to continue computing. If the first argument is something like a variable, the function doesn't know how to continue computing - it gets "\b{stuck}". So \icode{0 + \var{n}} directly computes to \icode{\var{n}} because the first argument is a concrete value, but \icode{\var{n} + 0} doesn't compute because pattern match gets "stuck" on \icode{\var{n}}.}
 
-    \p{In this hypothetical language we're using that can't automatically figure out \icode{\var{n} + 0 = \var{n}}, the designer made the choice not to implement anything fancier than "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.}
+    \p{In this hypothetical language we're using that can't automatically figure out \icode{\var{n} + 0 = \var{n}}, the designer made the choice to implement exactly "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.}
 
     \heading{Conclusion}
-    \p{The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, make equality a part of your design rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem.}
+    \p{The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, \b{make equality a conscious part of your design} rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem!}
 }

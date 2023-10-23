@@ -12,7 +12,7 @@
         Relevant:
         \enumerate{
             \item{\link{Armada}{https://6826.csail.mit.edu/2020/papers/armada.pdf}}
-            \item{\link{A Compositional Theory of Linearizability}{https://flint.cs.yale.edu/flint/publications/ctlinear.pdf} (They use linearizability as their notion of refinement)}
+            \item{\link{A Compositional Theory of Linearizability}{https://flint.cs.yale.edu/flint/publications/ctlinear.pdf}}
         }
     }
 }

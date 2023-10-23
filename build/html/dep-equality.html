@@ -10,7 +10,7 @@
 <p>
         <strong class="heading">
         Blogpost 💬
-    </strong> <a class="heading-link" href="DRAFT-equality.html">DRAFT: "Obvious" Equalities with Dependent Types</a> (10/19/2023)
+    </strong> <a class="heading-link" href="dep-equality.html">Equality, Dependent Types, and Typechecking</a> (10/23/2023)
     </p>
     <p>
         <p class="frontmatter">
@@ -119,11 +119,11 @@
     S z => <code><span style="color: blue">S</span></code> (<code><span style="color: blue">add</span></code> <code><span style="color: blue">z</span></code> <code><span style="color: blue">y</span></code>)</code></pre>
 
     <p>
-        Addition pattern matches on the first argument, and based only on that decides how to continue computing. If the first argument is something like a variable, the function gets "<strong>stuck</strong>" and doesn't know how to proceed. So <code>0 + <code><span style="color: blue">n</span></code></code> directly computes to <code><code><span style="color: blue">n</span></code></code> because the first argument is a concrete value, but <code><code><span style="color: blue">n</span></code> + 0</code> doesn't compute because pattern match gets "stuck" on <code><code><span style="color: blue">n</span></code></code>
+        Addition pattern matches on the first argument, and based only on that decides how to continue computing. If the first argument is something like a variable, the function doesn't know how to continue computing - it gets "<strong>stuck</strong>". So <code>0 + <code><span style="color: blue">n</span></code></code> directly computes to <code><code><span style="color: blue">n</span></code></code> because the first argument is a concrete value, but <code><code><span style="color: blue">n</span></code> + 0</code> doesn't compute because pattern match gets "stuck" on <code><code><span style="color: blue">n</span></code></code>.
     </p>
 
     <p>
-        In this hypothetical language we're using that can't automatically figure out <code><code><span style="color: blue">n</span></code> + 0 = <code><span style="color: blue">n</span></code></code>, the designer made the choice not to implement anything fancier than "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.
+        In this hypothetical language we're using that can't automatically figure out <code><code><span style="color: blue">n</span></code> + 0 = <code><span style="color: blue">n</span></code></code>, the designer made the choice to implement exactly "evaluate the two terms as far as possible, and then check if their syntax trees are the exact same". Again, this choice could have been made for any of the many reasons listed above, or more.
     </p>
 
     <p>
@@ -132,7 +132,7 @@
     </strong>
     </p>
     <p>
-        The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, make equality a part of your design rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem.
+        The key point is that equality is a design question! The algorithms that language designers implement all have their own tradeoffs, advantages, and difficulties, and why an equality is or isn't automatically solvable almost always has a complex answer. When designing a language, <strong>make equality a conscious part of your design</strong> rather than an afterthought. And in programming, when you encounter a frustrating case where the language can't do enough for you, explore the design decisions that led to that problem!
     </p>
     </p>
 </body>
