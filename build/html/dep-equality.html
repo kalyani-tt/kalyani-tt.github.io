@@ -84,7 +84,7 @@
     </p>
 
     <p>
-        A problem with this approach is that the terms might contain <strong>infinite loops</strong>. If we have <code>loopingTerm = 1</code>, we would evaluate <code>loopingTerm</code> forever, never getting to the point where we could compare <code>1</code> to anything. We could add <i>resource limits</i> - e.g limiting a computation to compute for a certain max amount of time. This is a valid design decision, but it doesn't provide a <strong>universal equality checking algorithm</strong>. A term might eventually compute to a concrete value, but what if it took 1000 years to do so? Even though this equality is solvable, this "universal" algorithm isn't usable in this case.
+        A problem with this approach is that the terms might contain <strong>infinite loops</strong>. If we have <code>loopingTerm = 1</code>, we would evaluate <code>loopingTerm</code> forever, never getting to the point where we could compare <code>1</code> to anything. The typical solution to this is to add <strong>termination checking</strong>, which employs various heuristics to check that both terms don't contain such infinite loops. The problem of fully accurate termination checking though - termination checking that always gives a correct yes/no answer to whether a term terminates - is <i>also</i> undecidable! This is a valid design decision, but we're again out of luck if we're looking for an algorithm that lets us write any program while also accurately verifying any equation.
     </p>
 
     <p>

@@ -82,6 +82,7 @@ code {
 pre {
   padding: 15px;
   display: block;
+  overflow-x: auto;   
   outline-color: black;
   outline-style: dotted
 }
