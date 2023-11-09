@@ -1,0 +1,10 @@
+\import{base-macros}
+\metadata{
+    \title{Improving Logic Programming}
+}
+
+\section{Improving Logic Programming}{
+    \p{I'm collecting some various ideas of mine here on how to improve logic programming}
+
+    \transclude{negative-info}
+}

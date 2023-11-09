@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kali's Notes</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<h2><a class="heading-link" href="me.html">Kali's Notes</a></h2>
+<p>
+        <strong class="heading">
+        Section 🗄️
+    </strong> <a class="heading-link" href="improving-lp.html">Improving Logic Programming</a>
+    </p>
+    <p>
+        <p>
+        I'm collecting some various ideas of mine here on how to improve logic programming
+    </p>
+
+    <div class="transclude">
+        <p>
+        <strong class="heading">
+        Idea 💡 
+    </strong> <a class="heading-link" href="negative-info.html">Negative Information</a>
+    </p>
+    <p>
+        <p>
+        In typical logic programming, a query can either succeed and return a substitution, or fail and return nothing. Providing a substitution (showing a counterexample) in the failure case as well would be great for showing <i>why</i> a query is false. For instance in languages implemented using an LF, error messages are usually terrible because they don't provide any information! The typecheck query just fails with no extra information. This could be fixed by providing counterexamples.
+    </p>
+
+    <p>
+        Maybe this could be done by running the <i>negation</i> of the query as well in parallel, and returning whichever succeeds first. This wouldn't require changing any of the internal machinery of the proof search. 
+    </p>
+    </p>
+    </div>
+    </p>
+</body>

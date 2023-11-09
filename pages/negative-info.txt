@@ -1,0 +1,10 @@
+\import{base-macros}
+\metadata{
+    \title{Negative Information}
+}
+
+\idea{Negative Information}{
+    \p{In typical logic programming, a query can either succeed and return a substitution, or fail and return nothing. Providing a substitution (showing a counterexample) in the failure case as well would be great for showing \i{why} a query is false. For instance in languages implemented using an LF, error messages are usually terrible because they don't provide any information! The typecheck query just fails with no extra information. This could be fixed by providing counterexamples.}
+
+    \p{Maybe this could be done by running the \i{negation} of the query as well in parallel, and returning whichever succeeds first. This wouldn't require changing any of the internal machinery of the proof search. }
+}

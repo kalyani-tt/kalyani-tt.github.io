@@ -68,7 +68,7 @@
 }
 
 \def{idea}{name content}{
-    \p{\stronghead{Project Idea 💡 } \hlink{\name}{\cat{\filename}{.html}}}
+    \p{\stronghead{Idea 💡 } \hlink{\name}{\cat{\filename}{.html}}}
     \p{\content}
 }
 
