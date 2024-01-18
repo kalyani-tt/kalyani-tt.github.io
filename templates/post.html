@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>"{{ page.title }}"</h1>
+{% if page.extra.draft %}
+<p><strong>Note:</strong> This page is a draft.</p>
+{% endif %}
+{% if page.extra.audience %}
+<p><strong>Suggested audience</strong>: {{ page.extra.audience }}</p>
+{% endif %}
+<hr>
+<p>
+{{ page.content | safe }}
+</p>
+<hr>
+<p><strong>(Last updated: {{ page.date }})</strong></p>
+{% endblock content %}

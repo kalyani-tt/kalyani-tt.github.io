@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Kalyani's Blog</h1>
+\((\lambda x. y) v = y[x/v]\)
+<p>
+My posts:
+<ul>
+{% for page in section.pages %}
+<li><a href="{{ page.permalink | safe }}">"{{ page.title }}"</a></li>
+{% endfor %}
+</ul>
+{% endblock content %}
+</p>
